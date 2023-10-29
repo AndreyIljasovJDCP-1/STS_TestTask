@@ -31,9 +31,6 @@ public class AuditManager {
             Path newFilePath = Path.of(directoryPath, DEFAULT_FILE_NAME);
             Files.write(newFilePath, newRecord.getBytes());
             return;
-            // 1 check if file path directoryPath + DEFAULT_FILE_NAME exists
-            // read the file check record == userName + ";" + eventTime + "\n"
-
         }
 
         int lastFilePathIndex = filePaths.size() - 1;
@@ -42,15 +39,11 @@ public class AuditManager {
 
         if (lines.size() < maxLinesPerFile) {
             Files.write(lastFilePath, newRecord.getBytes(), StandardOpenOption.APPEND);
-
-            //check last record = userName + ";" + eventTime + "\n"
-            // check size lines.size < maxLinesPerFile and after write check if lines.size == + 1;
         } else {
             int newFileIndex = lastFilePathIndex + 1;
             String newFileName = "audit_" + newFileIndex + ".csv";
             Path newFilePath = Path.of(directoryPath, newFileName);
             Files.write(newFilePath, newRecord.getBytes());
-            // read the file and check size
 
         }
     }
